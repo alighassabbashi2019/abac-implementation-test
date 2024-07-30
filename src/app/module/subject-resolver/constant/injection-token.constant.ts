@@ -1,0 +1,3 @@
+export const SUBJECT_STORE_KEY = 'SUBJECT_STORE_KEY';
+export const USELESS_TOKEN = 'USELESS_TOKEN';
+export const SUBJECT_TOKEN = 'SUBJECT_TOKEN';

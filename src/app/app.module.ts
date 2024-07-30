@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AuthenticationModule } from '@authentication/authentication.module';
 import { UserModule } from '@user/user.module';
 import { ProductModule } from '@product/product.module';
+import { SubjectResolverModule } from './module/subject-resolver/subject-resolver.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ProductModule } from '@product/product.module';
       synchronize: true,
       logging: false,
     }),
+    SubjectResolverModule.forRoot(),
     AuthenticationModule,
     UserModule,
     ProductModule,

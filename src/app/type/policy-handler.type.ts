@@ -1,9 +1,6 @@
 import { UserEntity } from '@user/model/user/user.entity';
+import { ActionEnum } from '@constant/enum';
 
-export interface IPolicyHandler {
-  handle(ability: UserEntity): boolean;
-}
+export type PolicyHandlerCallback<T> = (user: UserEntity, resource?: T) => boolean;
 
-export type PolicyHandlerCallback = (user: UserEntity) => boolean;
-
-export type PolicyHandler = IPolicyHandler | PolicyHandlerCallback;
+export type ResourcePolicy<T> = Record<ActionEnum, PolicyHandlerCallback<T>>;

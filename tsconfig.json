@@ -32,6 +32,9 @@
       "@guard/*": [
         "src/app/guard/*"
       ],
+      "@type/*": [
+        "src/app/type/*"
+      ],
       "@interface/*": [
         "src/app/interface/*"
       ],

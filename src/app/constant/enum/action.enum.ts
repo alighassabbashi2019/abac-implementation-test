@@ -1,7 +1,9 @@
 export enum ActionEnum {
   MANAGE = 'manage',
-  CREATE = 'create',
   READ = 'read',
+  LIST = 'list',
+  LIST_FILTERED = 'list_filtered',
+  CREATE = 'create',
   UPDATE = 'update',
   DELETE = 'delete',
 }
