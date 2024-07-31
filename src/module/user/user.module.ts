@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserRepository } from '@user/model/user/user.repository';
 import { SubjectResolverModule } from '../../app/module/subject-resolver/subject-resolver.module';
 import { SubjectEnum } from '@constant/enum';
+import { PolicyRepository } from '@authentication/model/policy/policy.repository';
 
-const repositories = [UserRepository];
+const repositories = [UserRepository, PolicyRepository];
 
 @Module({
   imports: [
