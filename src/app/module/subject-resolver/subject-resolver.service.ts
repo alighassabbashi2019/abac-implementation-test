@@ -13,6 +13,7 @@ export class SubjectResolverService {
   }
 
   resolveSubject(id: string): any {
+    console.log(this.store);
     const repository = this.moduleRef.get(this.store[this.subject]);
     return repository.findOne({ where: { id } });
   }
