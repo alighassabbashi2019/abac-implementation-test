@@ -2,14 +2,14 @@ import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGu
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from '@user/dto';
 import { AuthGuard } from '../../app/guard';
-import { ActionEnum, SubjectEnum } from '@constant/enum';
+import { ActionEnum, Resource } from '@constant/enum';
 import { PolicyGuard } from '@guard/policy.guard';
-import { AbacSubject } from '@decorator/abac-subject.decorator';
+import { AbacResource } from '@decorator/abac-resource.decorator';
 import { AbacAction } from '@decorator/abac-action.decorator';
 
 @Controller('user')
 @UseGuards(AuthGuard, PolicyGuard)
-@AbacSubject(SubjectEnum.USER)
+@AbacResource(Resource.USER)
 export class UserController {
   constructor(private readonly userService: UserService) {
   }

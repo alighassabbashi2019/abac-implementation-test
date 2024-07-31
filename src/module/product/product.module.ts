@@ -4,8 +4,8 @@ import { ProductController } from './product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductRepository } from './model/product.repository';
 import { UserModule } from '@user/user.module';
-import { SubjectResolverModule } from '../../app/module/subject-resolver/subject-resolver.module';
-import { SubjectEnum } from '@constant/enum';
+import { ResourceResolverModule } from '../../app/module/resource-resolver/resource-resolver.module';
+import { Resource } from '@constant/enum';
 import { PolicyRepository } from '@authentication/model/policy/policy.repository';
 
 const repositories = [ProductRepository, PolicyRepository];
@@ -14,8 +14,8 @@ const repositories = [ProductRepository, PolicyRepository];
   imports: [
     TypeOrmModule.forFeature(repositories),
     UserModule,
-    SubjectResolverModule.forFeature({
-      subject: SubjectEnum.PRODUCT,
+    ResourceResolverModule.forFeature({
+      resource: Resource.PRODUCT,
       repositories: [ProductRepository],
     }),
   ],

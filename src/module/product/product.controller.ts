@@ -4,15 +4,15 @@ import { ProductEntity } from './model/product.entity';
 import { CreateProductDto, UpdateProductDto } from './dto';
 import { AuthGuard } from '@guard/auth.guard';
 import { PolicyGuard } from '@guard/policy.guard';
-import { ActionEnum, SubjectEnum } from '@constant/enum';
+import { ActionEnum, Resource } from '@constant/enum';
 import { CurrentUser } from '@decorator/current-user.decorator';
 import { UserEntity } from '@user/model/user/user.entity';
-import { AbacSubject } from '@decorator/abac-subject.decorator';
+import { AbacResource } from '@decorator/abac-resource.decorator';
 import { AbacAction } from '@decorator/abac-action.decorator';
 
 @Controller('product')
 @UseGuards(AuthGuard, PolicyGuard)
-@AbacSubject(SubjectEnum.PRODUCT)
+@AbacResource(Resource.PRODUCT)
 export class ProductController {
   constructor(private readonly productService: ProductService) {
   }

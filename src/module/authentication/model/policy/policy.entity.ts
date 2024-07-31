@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { SubjectEnum } from '@constant/enum';
+import { Resource } from '@constant/enum';
 import { ActionEntity } from '@authentication/model';
 
 @Entity('policies')
@@ -10,8 +10,8 @@ export class PolicyEntity {
   @Column()
   name: string;
 
-  @Column({ type: 'enum', enum: SubjectEnum })
-  subject: SubjectEnum;
+  @Column({ type: 'enum', enum: Resource })
+  resource: Resource;
 
   @Column()
   actionId: string;

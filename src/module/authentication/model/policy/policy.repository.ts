@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { PolicyEntity } from '@authentication/model/policy/policy.entity';
-import { ActionEnum, SubjectEnum } from '@constant/enum';
+import { ActionEnum, Resource } from '@constant/enum';
 
 @Injectable()
 export class PolicyRepository extends Repository<PolicyEntity> {
@@ -9,10 +9,10 @@ export class PolicyRepository extends Repository<PolicyEntity> {
     super(PolicyEntity, dataSource.createEntityManager());
   }
 
-  findBySubjectAndAction(subject: SubjectEnum, actionName: ActionEnum) {
+  findByResourceAndAction(resource: Resource, actionName: ActionEnum) {
     return this.find({
       where: {
-        subject,
+        resource: resource,
         action: {
           name: actionName,
         },
