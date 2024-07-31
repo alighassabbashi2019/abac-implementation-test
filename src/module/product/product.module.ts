@@ -6,8 +6,9 @@ import { ProductRepository } from './model/product.repository';
 import { UserModule } from '@user/user.module';
 import { SubjectResolverModule } from '../../app/module/subject-resolver/subject-resolver.module';
 import { SubjectEnum } from '@constant/enum';
+import { PolicyRepository } from '@authentication/model/policy/policy.repository';
 
-const repositories = [ProductRepository];
+const repositories = [ProductRepository, PolicyRepository];
 
 @Module({
   imports: [

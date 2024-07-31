@@ -2,31 +2,32 @@ import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Post, UseGu
 import { UserService } from './user.service';
 import { CreateUserDto, UpdateUserDto } from '@user/dto';
 import { AuthGuard } from '../../app/guard';
-import { CheckPolicies } from '@decorator/check-policy.decorator';
-import { UserPolicy } from '@user/policy/user.policy';
-import { ActionEnum } from '@constant/enum';
+import { ActionEnum, SubjectEnum } from '@constant/enum';
 import { PolicyGuard } from '@guard/policy.guard';
+import { AbacSubject } from '@decorator/abac-subject.decorator';
+import { AbacAction } from '@decorator/abac-action.decorator';
 
 @Controller('user')
 @UseGuards(AuthGuard, PolicyGuard)
+@AbacSubject(SubjectEnum.USER)
 export class UserController {
   constructor(private readonly userService: UserService) {
   }
 
   @Get('/')
-  @CheckPolicies(UserPolicy[ActionEnum.LIST])
+  @AbacAction(ActionEnum.LIST)
   getAllUsers() {
     return this.userService.getAll();
   }
 
   @Post('/')
-  @CheckPolicies(UserPolicy[ActionEnum.CREATE])
+  @AbacAction(ActionEnum.CREATE)
   createNewUser(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
   @Patch('/:id')
-  @CheckPolicies(UserPolicy[ActionEnum.UPDATE])
+  @AbacAction(ActionEnum.UPDATE)
   updateUser(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -35,7 +36,7 @@ export class UserController {
   }
 
   @Delete('/:id')
-  @CheckPolicies(UserPolicy[ActionEnum.DELETE])
+  @AbacAction(ActionEnum.DELETE)
   deleteUser(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.userService.delete(id);
   }

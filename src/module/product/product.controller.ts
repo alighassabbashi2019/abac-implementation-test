@@ -3,27 +3,28 @@ import { ProductService } from './product.service';
 import { ProductEntity } from './model/product.entity';
 import { CreateProductDto, UpdateProductDto } from './dto';
 import { AuthGuard } from '@guard/auth.guard';
-import { CheckPolicies } from '@decorator/check-policy.decorator';
 import { PolicyGuard } from '@guard/policy.guard';
-import { ProductPolicies } from '@product/policy/product.policy';
-import { ActionEnum } from '@constant/enum';
+import { ActionEnum, SubjectEnum } from '@constant/enum';
 import { CurrentUser } from '@decorator/current-user.decorator';
 import { UserEntity } from '@user/model/user/user.entity';
+import { AbacSubject } from '@decorator/abac-subject.decorator';
+import { AbacAction } from '@decorator/abac-action.decorator';
 
 @Controller('product')
 @UseGuards(AuthGuard, PolicyGuard)
+@AbacSubject(SubjectEnum.PRODUCT)
 export class ProductController {
   constructor(private readonly productService: ProductService) {
   }
 
   @Get('/')
-  @CheckPolicies(ProductPolicies[ActionEnum.LIST])
+  @AbacAction(ActionEnum.LIST)
   getAllProducts() {
     return this.productService.findAll();
   }
 
   @Post('/')
-  @CheckPolicies(ProductPolicies[ActionEnum.CREATE])
+  @AbacAction(ActionEnum.CREATE)
   createProduct(
     @CurrentUser() currentUser: UserEntity,
     @Body() createProductDto: CreateProductDto,
@@ -32,7 +33,7 @@ export class ProductController {
   }
 
   @Patch('/:id')
-  @CheckPolicies(ProductPolicies[ActionEnum.UPDATE])
+  @AbacAction(ActionEnum.UPDATE)
   updateProduct(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateProductDto: UpdateProductDto,
